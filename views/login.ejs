@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <a href="/" class="header1">Top</a>
+        <a href="/new" class="header2">新規登録</a>
+        <a href="/login" class="header3">ログイン</a>
+    </header>
+    <main>
+        <div class="main-container">
+            <form action="/login" method="post">
+                <h1>ユーザー名</h1>
+                <input type="text" name="userName" class="textbox">
+                <h1>パスワード</h1>
+                <input type="password" name="userPass" class="textbox">
+                <input type="submit" value="ログイン" class="sendbox">
+                <p id='login-error'><%= loginError %></p>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
