@@ -8,10 +8,10 @@ app.use(express.urlencoded({extended: false}));
 var connection;
 function handleDisconnect(){
   connection = mysql.createConnection({
-    host : '',
-    user : '',
-    password : '',
-    database : ''
+    host : 'us-cdbr-east-02.cleardb.com',
+    user : 'b1c89434724d34',
+    password : '35930ca1',
+    database : 'heroku_d19328f988137ab'
   });
   connection.connect((error) => {
     if (error) {
@@ -32,6 +32,7 @@ handleDisconnect();
 var userData = {userName: '', userPass: ''};
 var createError = '';
 var loginError = '';
+var threadError = '';
 
 app.get('/', (req, res) => {
   res.render('top.ejs');
@@ -54,7 +55,15 @@ app.get('/index', (req, res) => {
   if (userData['userName'] == ''){
     res.redirect('/login');
   }else{
-    res.render('index.ejs', {userName : userData['userName'], userScore : userData['userScore']});
+    res.render('index.ejs', {userName : userData['userName'], threadError : threadError});
+  }
+});
+
+app.get('/index2', (req, res) => {
+  if (userData['userName'] == ''){
+    res.redirect('/login');
+  }else{
+    res.render('index2.ejs');
   }
 });
 
@@ -70,27 +79,26 @@ app.post('/create', (req, res) => {
   if (req.body.userPass==''||req.body.userName==''){
     createError = '※すべて記入してください。'
     res.redirect('/new');
+  }else if (req.body.userName.length < 4 || req.body.userName.length > 8){
+    createError = '※4文字以上8文字以内の名前にしてください。'
+    res.redirect('/new');
   }else{
     connection.query(
-      'select name from users where name = ?;',
-      [req.body.userMail],
+      'select user_name from users where user_name = ?;',
+      [req.body.userName],
       (error, results) => {
         if (results == false){
           connection.query(
-            'insert into users (mail, pass, name) values (?,?,?);',
-            [req.body.userMail, req.body.userPass, req.body.userName],
+            'insert into users (user_name, user_pass) values (?,?);',
+            [req.body.userName, req.body.userPass],
              (error, results) => {
               createError = '';
-              userData = {userMail: req.body.userMail, userPass: req.body.userPass, userName: req.body.userName, userScore: 0};
-              mailOptions['to'] = userData['userMail']
-              mailOptions['text'] = userData['userName'] + 'さんのアカウントが登録されました。\n下記urlからログインしてください。\n' +
-              'https://powerful-fortress-65968.herokuapp.com/index'
-              transporter.sendMail(mailOptions);
-              res.redirect('/confirm')
+              userData = {userName: req.body.userName, userPass: req.body.userPass};
+              res.redirect('/index')
             }
           );
         }else{
-          createError = '※メールアドレスは既に登録済みです。'
+          createError = '※そのユーザー名は既に使われています。';
           res.redirect('/new');
         }
       }
@@ -100,8 +108,8 @@ app.post('/create', (req, res) => {
 
 app.post('/delete', (req, res) => {
   connection.query(
-    'delete from users where mail = ? and pass = ? and name = ?;',
-    [userData['userMail'], userData['userPass'], userData['userName']],
+    'delete from users where user_name = ? and user_pass = ?;',
+    [userData['userName'], userData['userPass']],
     (error, results) => {
       res.redirect('/');
     }
@@ -110,19 +118,41 @@ app.post('/delete', (req, res) => {
 
 app.post('/login', (req, res) => {
   connection.query(
-    'select * from users where mail = ? and pass = ?;',
-    [req.body.userMail, req.body.userPass],
+    'select * from users where user_name = ? and user_pass = ?;',
+    [req.body.userName, req.body.userPass],
     (error, results) => {
       if (results == false){
-        loginError = '※メールアドレスまたはパスワードが正しくありません。';
+        loginError = '※ユーザー名またはパスワードが正しくありません。';
         res.redirect('/login');
       }else{
-        userData = {userMail: results[0]['mail'], userPass: results[0]['pass'], userName: results[0]['name'], userScore: 0};
+        userData = {userName: results[0]['user_name'], userPass: results[0]['user_pass']};
         res.redirect('/index');
       }
     }
   );
 });
 
+app.post('/search-thread', (req, res) => {
+  connection.query(
+    'select * from ' + req.body.threadName + ';',
+    (error, results) => {
+      if (results == undefined){
+        threadError = '検索されたスレッドは存在しません。';
+        res.redirect('/index');
+      }else{
+        res.redirect('/index2');
+      }
+    }
+  );
+});
+
+app.post('/create-thread', (req, res) => {
+  connection.query(
+    'create table ' + req.body.threadName + ' (user_id int, comment text) default charset=utf8;',
+    (error, results) => {
+      res.redirect('/index2');
+    }
+  );
+});
 
 app.listen(process.env.PORT || 3000);

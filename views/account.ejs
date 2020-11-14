@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index</title>
+    <title>account</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -16,15 +16,11 @@
     </header>
     <main>
         <div class="main-container">
-            <p>スレッドタイトル</p>
-            <input type="text" name="threadName" class="textbox">
-            <form action="/create-thread" method="post">
-                <input type="submit" value="スレッドを作成" class="create-button">
+            <h1>ユーザー名</h1>
+            <%= userName %>
+            <form action="/delete" method="POST">
+                <input type="submit" value="アカウント削除" class="deletebox">
             </form>
-            <form action="/search-thread" method="post">
-                <input type="submit" value="スレッドを検索" class="search-button">
-            </form>
-            <p id='thread-error'><%= threadError %></p>
         </div>
     </main>
 </body>
