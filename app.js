@@ -29,64 +29,36 @@ function handleDisconnect(){
 
 handleDisconnect();
 
-var userData = {'userName': '', 'userPass': ''};
-var createError = '';
-var loginError = '';
-var threadName = '';
-var threadData = [];
-var threadCreateError = '';
-var threadSearchError = '';
+var userData;
+var createError;
+var loginError;
+var threadName;
+var threadData;
+var threadCreateError;
+var threadSearchError;
 
 app.get('/', (req, res) => {
   res.render('top.ejs');
-  userData = {'userName': '', 'userPass': ''};
-  threadName = '';
-  threadData = [];
 });
 
 app.get('/new', (req, res) => {
   res.render('new.ejs', {createError : createError});
-  createError = '';
-  userData = {'userName': '', 'userPass': ''};
-  threadName = '';
-  threadData = [];
 });
 
 app.get('/login', (req, res) => {
   res.render('login.ejs', {loginError : loginError});
-  loginError = '';
-  userData = {'userName': '', 'userPass': ''};
-  threadName = '';
-  threadData = [];
 });
 
 app.get('/index', (req, res) => {
-  if (userData['userName'] == ''){
-    res.redirect('/login');
-  }else{
-    res.render('index.ejs', {userName : userData['userName'], threadSearchError : threadSearchError, threadCreateError : threadCreateError});
-  }
-  threadError = '';
-  threadName = '';
-  threadData = [];
+  res.render('index.ejs', {userName : userData['userName'], threadSearchError : threadSearchError, threadCreateError : threadCreateError});
 });
 
 app.get('/index2', (req, res) => {
-  if (userData['userName'] == ''){
-    res.redirect('/login');
-  }else if (threadName == ''){
-    res.redirect('/index');
-  }else{
-    res.render('index2.ejs', {userName : userData['userName'], threadName : threadName, threadData : threadData});
-  }
+  res.render('index2.ejs', {userName : userData['userName'], threadName : threadName, threadData : threadData});
 });
 
 app.get('/account', (req, res) => {
-  if (userData['userName'] == ''){
-    res.redirect('/login');
-  }else{
-    res.render('account.ejs', {userName : userData['userName']})
-  }
+  res.render('account.ejs', {userName : userData['userName']})
 });
 
 app.post('/create', (req, res) => {
