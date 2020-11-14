@@ -4,8 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>index2</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    
+    <header>
+        <a href="/index" class="item">Home</a>
+        <ul class="menu">
+            <li><a href="/" class="item">ログアウト</a></li>
+            <li><a href="/account" class="item"><%= userName %></a></li>
+        </ul>
+    </header>
+    <main>
+        <nav></nav>
+        <div class="main-container">
+            <p><%= threadName %></p>
+            <div class="chat-box">
+                <% threadData.forEach((data) => { %>
+                    <li><%= data['user_name'] %> : <%= data['comment'] %></li>
+                <% }) %>
+            </div>
+            <form action="/comment" method="POST"  class="comment">
+                <input type="text" name="comment" class="textbox2">
+                <input type="submit" value="送信" class="button2">
+            </form>
+        </div>
+        <aside>
+        </aside>
+    </main>
+    <footer></footer>
 </body>
 </html>

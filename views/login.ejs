@@ -15,16 +15,19 @@
         </ul>
     </header>
     <main>
+        <nav></nav>
         <div class="main-container">
             <form action="/login" method="post">
                 <h1>ユーザー名</h1>
                 <input type="text" name="userName" class="textbox">
                 <h1>パスワード</h1>
                 <input type="password" name="userPass" class="textbox">
-                <input type="submit" value="ログイン" class="sendbox">
-                <p id='login-error'><%= loginError %></p>
+                <input type="submit" value="ログイン" class="button">
+                <p><%= loginError %></p>
             </form>
         </div>
+        <aside></aside>
     </main>
+    <footer></footer>
 </body>
 </html>

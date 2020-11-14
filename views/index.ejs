@@ -15,17 +15,23 @@
         </ul>
     </header>
     <main>
+        <nav></nav>
         <div class="main-container">
-            <p>スレッドタイトル</p>
-            <input type="text" name="threadName" class="textbox">
-            <form action="/create-thread" method="post">
-                <input type="submit" value="スレッドを作成" class="create-button">
+            <form action="/search-thread" method="post" class="thread">
+                <p>スレッドタイトル</p>
+                <input type="text" name="threadName" class="textbox">
+                <input type="submit" value="スレッドを検索" class="button">
+                <p><%= threadSearchError %></p>
             </form>
-            <form action="/search-thread" method="post">
-                <input type="submit" value="スレッドを検索" class="search-button">
+            <form action="/create-thread" method="post" class="thread">
+                <p>スレッドタイトル</p>
+                <input type="text" name="threadName" class="textbox">
+                <input type="submit" value="スレッドを作成" class="button">
+                <p><%= threadCreateError %></p>
             </form>
-            <p id='thread-error'><%= threadError %></p>
         </div>
+        <aside></aside>
     </main>
+    <footer></footer>
 </body>
 </html>

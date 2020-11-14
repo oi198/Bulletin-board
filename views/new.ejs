@@ -16,16 +16,19 @@
         </ul>
     </header>
     <main>
+        <nav></nav>
         <div class="main-container">
             <form action="/create" method="post">
                 <h1>ユーザー名</h1>
                 <input type="text" name="userName" class="textbox">
                 <h1>パスワード</h1>
                 <input type="password" name="userPass" class="textbox">
-                <input type="submit" value="送信" class="sendbox">
-                <p id='create-error'><%= createError %></p>
+                <input type="submit" value="送信" class="button">
+                <p><%= createError %></p>
             </form>
         </div>
+        <aside></aside>
     </main>
+    <footer></footer>
 </body>
 </html>
