@@ -39,26 +39,45 @@ var threadSearchError;
 
 app.get('/', (req, res) => {
   res.render('top.ejs');
+  userData = {'userName':'', 'userPass':''};
 });
 
 app.get('/new', (req, res) => {
   res.render('new.ejs', {createError : createError});
+  userData = {'userName':'', 'userPass':''};
+  createError = '';
 });
 
 app.get('/login', (req, res) => {
   res.render('login.ejs', {loginError : loginError});
+  userData = {'userName':'', 'userPass':''};
+  loginError = '';
 });
 
 app.get('/index', (req, res) => {
-  res.render('index.ejs', {userName : userData['userName'], threadSearchError : threadSearchError, threadCreateError : threadCreateError});
+  if (userData['userName'] == ''){
+    res.redirect('/login');
+  }else{
+    res.render('index.ejs', {userName : userData['userName'], threadSearchError : threadSearchError, threadCreateError : threadCreateError});
+  }
+  threadSearchError = '';
+  threadCreateError = '';
 });
 
 app.get('/index2', (req, res) => {
-  res.render('index2.ejs', {userName : userData['userName'], threadName : threadName, threadData : threadData});
+  if (userData['userName'] == ''){
+    res.redirect('/login');
+  }else{
+    res.render('index2.ejs', {userName : userData['userName'], threadName : threadName, threadData : threadData});
+  }
 });
 
 app.get('/account', (req, res) => {
-  res.render('account.ejs', {userName : userData['userName']})
+  if (userData['userName'] == ''){
+    res.redirect('/login');
+  }else{
+    res.render('account.ejs', {userName : userData['userName']})
+  }
 });
 
 app.post('/create', (req, res) => {
