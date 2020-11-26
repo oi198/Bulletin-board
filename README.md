@@ -39,9 +39,9 @@ url : https://afternoon-escarpment-47796.herokuapp.com <br>
  + アプリケーションをherokuにデプロイした際、以下のようなエラーが発生しました。<br>
   `Error: Connection lost: The server closed the connection.`<br>
   clearDBのセキュリティの仕様により、定期的にNode.jsとの接続が切れるようになっているため、こうしたエラーが発生したようです。<br>
-  `
-  aaaa\n
+  ```
   aaaa
-  `
+  aaaa
+  ```
   
  
