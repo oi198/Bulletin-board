@@ -27,4 +27,11 @@ url : https://afternoon-escarpment-47796.herokuapp.com <br>
 
 #### 苦労した点
 
- + Node.jsでMySQL(version8.0)にデフォルト設定のまま接続しようとすると、「Error: ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server;」というエラーが表示される。
+ + Node.jsでローカルのMySQL(version8.0)にデフォルト設定のまま接続しようとすると、次のエラーが表示されます。<br>
+ `Error: ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server;`<br>
+ どうやらMySQLがversion8.0にアップデートされる際にMySQLへのログイン時のパスワード認証方法が変更されたようです。<br>
+ Node.jsは未だにその変更に対応できていないため、こうしたエラーが発生しました。<br>
+ そこで、ローカルでMySQLにログインした際、次のコードを実行します。
+ `ALTER USER 'nodeuser'@'localhost' IDENTIFIED WITH mysql_native_password BY 'nodeuser';`<br>
+ `FLUSH PRIVILEGES;`<br>
+ 
