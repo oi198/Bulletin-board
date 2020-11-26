@@ -40,7 +40,7 @@ url : https://afternoon-escarpment-47796.herokuapp.com <br>
   `Error: Connection lost: The server closed the connection.`<br>
   clearDBのセキュリティの仕様により、定期的にNode.jsとの接続が切れるようになっているため、こうしたエラーが発生したようです。<br>
   `
-  aaaa<br>
+  aaaa\n
   aaaa
   `
   
