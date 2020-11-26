@@ -2,6 +2,8 @@
 
 url : https://afternoon-escarpment-47796.herokuapp.com <br>
 
+言語 : html, css , javascript, Node.js, MySQL(clearDB)
+
 #### 機能
 
 + スレッド検索<br>
