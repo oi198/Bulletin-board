@@ -40,30 +40,30 @@ url : https://afternoon-escarpment-47796.herokuapp.com <br>
   `Error: Connection lost: The server closed the connection.`<br>
   clearDBのセキュリティの仕様により、定期的にNode.jsとの接続が切れるようになっているため、こうしたエラーが発生したようです。<br>
   以下のコードを追加することで、接続が切れると再接続するように設定します。<br>
-  ```
-  var connection;
-  function handleDisconnect(){
-    connection = mysql.createConnection({
-      host : 'xxxx',
-      user : 'xxxx',
-      password : 'xxxx',
-      database : 'xxxx'
-    });
-    connection.connect((error) => {
-      if (error) {
-        setTimeout(handleDisconnect, 2000);
-      }
-    });
-    connection.on('error', (error) => {
-      if (error.code === 'PROTOCOL_CONNECTION_LOST') {
-        handleDisconnect();
-      } else {
-        throw error;
-      }
-    });
-  }
+    ```
+    var connection;
+    function handleDisconnect(){
+      connection = mysql.createConnection({
+        host : 'xxxx',
+        user : 'xxxx',
+        password : 'xxxx',
+        database : 'xxxx'
+      });
+      connection.connect((error) => {
+        if (error) {
+          setTimeout(handleDisconnect, 2000);
+        }
+      });
+      connection.on('error', (error) => {
+        if (error.code === 'PROTOCOL_CONNECTION_LOST') {
+          handleDisconnect();
+        } else {
+          throw error;
+        }
+      });
+    }
 
-  handleDisconnect();
-  ```
+    handleDisconnect();
+    ```
   
  
