@@ -24,3 +24,7 @@ url : https://afternoon-escarpment-47796.herokuapp.com <br>
 + ログイン
  ユーザ名とパスワードを入力するとログイン後の画面が表示されます。<br>
  該当するユーザ名が登録されていない場合やパスワードが異なる場合、「※ユーザー名またはパスワードが正しくありません。」と画面に表示されます。<br>
+
+#### 苦労した点
+
+ + Node.jsでMySQL(version8.0)にデフォルト設定のまま接続しようとすると、「Error: ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server;」というエラーが表示される。
