@@ -31,7 +31,8 @@ url : https://afternoon-escarpment-47796.herokuapp.com <br>
  `Error: ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server;`<br>
  どうやらMySQLがversion8.0にアップデートされる際にMySQLへのログイン時のパスワード認証方法が変更されたようです。<br>
  Node.jsは未だにその変更に対応できていないため、こうしたエラーが発生しました。<br>
- そこで、ローカルでMySQLにログインした際、次のコードを実行します。
+ そこで、ローカルでMySQLにログインした際、次のコードを実行します。<br>
  `ALTER USER 'nodeuser'@'localhost' IDENTIFIED WITH mysql_native_password BY 'nodeuser';`<br>
  `FLUSH PRIVILEGES;`<br>
+ 参考記事 : https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server/50961428
  
