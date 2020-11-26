@@ -34,5 +34,10 @@ url : https://afternoon-escarpment-47796.herokuapp.com <br>
  そこで、ローカルでMySQLにログインした際、次のコードを実行します。<br>
  `ALTER USER 'nodeuser'@'localhost' IDENTIFIED WITH mysql_native_password BY 'nodeuser';`<br>
  `FLUSH PRIVILEGES;`<br>
- 参考記事 : https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server/50961428
+ 参考記事 : https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server/50961428<br>
+ 
+ + アプリケーションをherokuにデプロイした際、以下のようなエラーが発生しました。<br>
+  `Error: Connection lost: The server closed the connection.`<br>
+  clearDBのセキュリティの仕様により、定期的にNode.jsとの接続が切れるようになっているため、こうしたエラーが発生したようです。<br>
+  
  
