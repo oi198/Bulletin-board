@@ -65,5 +65,5 @@ url : https://afternoon-escarpment-47796.herokuapp.com <br>
 
     handleDisconnect();
     ```
-  
+  参考記事 : https://stackoverflow.com/questions/58034107/why-does-my-node-app-works-for-a-few-moments-on-and-crashes-heroku
  
